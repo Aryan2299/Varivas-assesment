@@ -1,0 +1,18 @@
+{
+  "name": "varivas-assessment",
+  "version": "1.0.0",
+  "description": "Varivas interview round 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Aryan Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^9.0.3",
+    "nodemon": "^2.0.12",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}
