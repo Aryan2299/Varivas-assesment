@@ -6,6 +6,16 @@ const keys = require("../config/keys");
 
 const User = mongoose.model("users");
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -13,14 +23,24 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
     },
-    (accessToken, refreshToken, profile) => {
+    (accessToken, refreshToken, profile, done) => {
       console.log("profile: ", profile);
 
-      new User({
-        userId: profile.id,
-        name: profile.displayName,
-        photo: profile.photos[0].value,
-      }).save();
+      User.findOne({ userId: profile.id }).then((existingUser) => {
+        if (!existingUser) {
+          new User({
+            userId: profile.id,
+            name: profile.displayName,
+            photo: profile.photos[0].value,
+          })
+            .save()
+            .then((user) => {
+              done(null, user);
+            });
+        } else {
+          done(null, existingUser);
+        }
+      });
     }
   )
 );
