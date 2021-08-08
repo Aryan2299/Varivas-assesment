@@ -1,27 +1,27 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-  userId: {
+const postSchema = new Schema({
+  title: {
     type: String,
     required: true,
   },
-  name: {
+  text: {
     type: String,
     required: true,
   },
-  photo: {
+  image: {
     type: String,
     required: true,
   },
-  followers: {
-    type: [mongoose.Types.ObjectId],
+  createdBy: {
+    type: mongoose.ObjectId,
     required: true,
   },
-  following: {
-    type: [mongoose.Types.ObjectId],
+  date: {
+    type: Date,
     required: true,
   },
 });
 
-mongoose.model("users", userSchema);
+mongoose.model("posts", postSchema);

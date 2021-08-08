@@ -25,6 +25,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       console.log("profile: ", profile);
+      console.log("accessToken: ", accessToken);
 
       User.findOne({ userId: profile.id }).then((existingUser) => {
         if (!existingUser) {
