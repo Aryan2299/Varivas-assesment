@@ -15,7 +15,7 @@ const postSchema = new Schema({
     required: true,
   },
   createdBy: {
-    type: mongoose.ObjectId,
+    type: mongoose.Types.ObjectId,
     required: true,
   },
   date: {
